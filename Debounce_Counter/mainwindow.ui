@@ -124,7 +124,7 @@
       <widget class="QPushButton" name="pushButton">
        <property name="geometry">
         <rect>
-         <x>1000</x>
+         <x>1110</x>
          <y>30</y>
          <width>93</width>
          <height>28</height>
@@ -197,16 +197,22 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>592</x>
          <y>2</y>
-         <width>278</width>
-         <height>59</height>
+         <width>287</width>
+         <height>65</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>7</number>
+        </property>
+        <property name="bottomMargin">
+         <number>7</number>
+        </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
@@ -262,6 +268,16 @@
             </property>
             <property name="value">
              <number>6000</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="set_dtc">
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>set DTC</string>
             </property>
            </widget>
           </item>

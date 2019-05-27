@@ -22,6 +22,7 @@ public:
 public slots:
     void realtimePlot();
     void counterPlot();
+    void setDTC(QVector<double>&);
 
 private slots:
     void on_pushButton_clicked();

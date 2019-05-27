@@ -69,7 +69,7 @@ void MainWindow::realtimePlot()
 void MainWindow::counterPlot()
 {
     int i;
-    int n_points = (int)(ui->total_fail_time->value()/ui->execution_rate->value() + 1)* ui->fault_periods->value();
+    int n_points = (ui->total_fail_time->value()/ui->execution_rate->value() + 1)* ui->fault_periods->value();
     qDebug() << "n_points: " << n_points << endl;
     QVector<double> x(n_points), fault_detection_counter(n_points), threshold_up(n_points), threshold_down(n_points);
     // QCPTextElement *title = new QCPTextElement(ui->widget, "Power vs. Wind Speed", QFont("sans", 17, QFont::Bold));
@@ -105,6 +105,9 @@ void MainWindow::counterPlot()
             val-= (double)ui->count_down->value();
     }
 
+    if(ui->set_dtc->checkState()){
+        setDTC(fault_detection_counter);
+    }
     //ui->widget->plotLayout()->addElement(0,0,title);
     ui->widget->setInteractions(ui->widget->interactions() | QCP::iRangeDrag);
     ui->widget->setInteractions(ui->widget->interactions() | QCP::iRangeZoom);
@@ -141,7 +144,18 @@ void MainWindow::counterPlot()
     ui->widget->replot();
    qDebug() << threshold_down.last() << endl;
     // connect(&timer_plot, SIGNAL(timeout()),this,SLOT(realtimePlot()));
-    // timer_plot.start(0);
+   // timer_plot.start(0);
+}
+
+void MainWindow::setDTC(QVector<double>& dtc)
+{
+    int n = dtc.size();
+    int i;
+    if(n > 0){
+        for(i = 0; i < n; ++i){
+            dtc[i] = i;
+        }
+    }
 }
 
 void MainWindow::on_pushButton_clicked()
