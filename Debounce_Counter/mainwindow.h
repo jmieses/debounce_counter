@@ -20,9 +20,12 @@ public:
     ~MainWindow();
 
 public slots:
+    void configurePlot();
     void realtimePlot();
     void counterPlot();
-    void setDTC(QVector<double>&);
+    void setFailState(QVector<double>&);
+    void setPassState(QVector<double>&);
+    void setFailPassState(QVector<double>&);
 
 private slots:
     void on_pushButton_clicked();
@@ -30,7 +33,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer *timer_plot;
-    QSpinBox* periods;
+    QSpinBox *periods;
 };
 
 #endif // MAINWINDOW_H

@@ -80,6 +80,9 @@
           <property name="text">
            <string>Jump Down</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -96,6 +99,9 @@
           </property>
           <property name="maximum">
            <number>0</number>
+          </property>
+          <property name="value">
+           <number>-8</number>
           </property>
          </widget>
         </item>
@@ -166,6 +172,9 @@
           <property name="text">
            <string>Jump Up</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -176,7 +185,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="jump_up_value"/>
+         <widget class="QSpinBox" name="jump_up_value">
+          <property name="value">
+           <number>8</number>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="threshold_up_label">
