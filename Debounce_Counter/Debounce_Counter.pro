@@ -14,10 +14,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    dialog.cpp \
         mainwindow.cpp \
     qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
+    dialog.h \
     qcustomplot.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialog.ui
