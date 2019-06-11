@@ -6,6 +6,9 @@
 #include "qcustomplot.h"
 
 
+#include "dialog.h"
+#include "ui_dialog.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +29,7 @@ public slots:
     void setFailState(QVector<double>&);
     void setPassState(QVector<double>&);
     void setFailPassState(QVector<double>&);
+    void showSecondWindow();
 
 private slots:
     void on_pushButton_clicked();
@@ -34,6 +38,7 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer_plot;
     QSpinBox *periods;
+    Dialog* dialog;
 };
 
 #endif // MAINWINDOW_H

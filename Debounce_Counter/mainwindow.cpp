@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     configurePlot();
+    qDebug() << "This is to test the home branch" << "\n";
 }
 
 MainWindow::~MainWindow()
@@ -90,8 +91,8 @@ void MainWindow::counterPlot()
     }
 
     if(ui->set_dtc->checkState()){
-       // setFailState(fault_detection_counter);
-        setFailPassState(fault_detection_counter);
+        setFailState(fault_detection_counter);
+       // setFailPassState(fault_detection_counter);
     }else{
         setPassState(fault_detection_counter);
     }
@@ -149,10 +150,18 @@ void MainWindow::counterPlot()
 void MainWindow::setFailState(QVector<double>& fdc)
 {
     int n = fdc.size();
-    double i = ui->jump_up_value->value();
+    int i;
+    double val = 0;
+    double count_up = ui->count_up->value();
+    if(ui->jump_up->checkState())
+        val = ui->jump_up_value->value();
+
     if(n > 0){
-        for( ; i < n; ++i){
-            fdc[i] = i;
+        fdc[0] = 0;
+        for(i = 1 ; i < n; ++i){
+            fdc[i] = val;
+            val += count_up;
+
             if(fdc[i] >= MAX_FAILED){
                 fdc[i] = MAX_FAILED;
             }
@@ -172,24 +181,23 @@ void MainWindow::setPassState(QVector<double>& fdc)
     /* In contrast to setFailState() use a separete variable val
      * to fill data of vector since -128 < fdc[i] < jump_down_value
     */
-    int n = fdc.size();
-    fdc.resize(n + 1);
+    int n = fdc.size() + 1;
+    fdc.resize(n);
     int i;
 
     double val = ui->jump_down_value->value();
+    double count_down = ui->count_down->value();
     if(n > 0){
         fdc[0] = 0;
-        for(i = 1; i < n + 1; ++i){
+        for(i = 1; i < n; ++i){
             fdc[i] = val;
-            val--;
+            val += count_down;
+
             if(fdc[i] <= MAX_PASSED){
                 fdc[i] = MAX_PASSED;
             }
         }
     }
-    qDebug() << "fdc.end(): " << *(fdc.end()-1) << "\n";
-    qDebug() << "val: " << val << "\n";
-    qDebug() << "fdc.size(): " << fdc.size() << "\n";
 }
 
 /**************************************************************************
@@ -220,6 +228,11 @@ void MainWindow::setFailPassState(QVector<double>& fdc)
         else
             val-= (double)(ui->count_down->value());
     }
+}
+
+void MainWindow::showSecondWindow()
+{
+    ui->actionOptions->
 }
 
 /**************************************************************************
