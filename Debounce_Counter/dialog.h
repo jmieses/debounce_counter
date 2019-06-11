@@ -13,6 +13,7 @@ class Dialog : public QDialog
 
 public:
     explicit Dialog(QWidget *parent = nullptr);
+    bool getFailPassedCheckBox();
     ~Dialog();
 
 private:

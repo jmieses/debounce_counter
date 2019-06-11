@@ -8,6 +8,11 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
 }
 
+bool Dialog::getFailPassedCheckBox()
+{
+    return ui->fail_pass_checkBox->checkState();
+}
+
 Dialog::~Dialog()
 {
     delete ui;

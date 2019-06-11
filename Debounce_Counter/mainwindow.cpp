@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    dialog = new Dialog(this);
     configurePlot();
-    qDebug() << "This is to test the home branch" << "\n";
 }
 
 MainWindow::~MainWindow()
@@ -92,7 +92,8 @@ void MainWindow::counterPlot()
 
     if(ui->set_dtc->checkState()){
         setFailState(fault_detection_counter);
-       // setFailPassState(fault_detection_counter);
+    }else if(dialog->getFailPassedCheckBox()){
+       setFailPassState(fault_detection_counter);
     }else{
         setPassState(fault_detection_counter);
     }
@@ -232,7 +233,7 @@ void MainWindow::setFailPassState(QVector<double>& fdc)
 
 void MainWindow::showSecondWindow()
 {
-    ui->actionOptions->
+
 }
 
 /**************************************************************************

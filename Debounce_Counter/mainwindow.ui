@@ -53,8 +53,8 @@
         <rect>
          <x>20</x>
          <y>30</y>
-         <width>552</width>
-         <height>24</height>
+         <width>591</width>
+         <height>27</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -67,8 +67,14 @@
         </item>
         <item>
          <widget class="QSpinBox" name="count_down">
+          <property name="minimum">
+           <number>-1000</number>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
           <property name="value">
-           <number>1</number>
+           <number>-1</number>
           </property>
          </widget>
         </item>
@@ -146,7 +152,7 @@
          <x>22</x>
          <y>2</y>
          <width>528</width>
-         <height>24</height>
+         <height>27</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -215,8 +221,8 @@
         <rect>
          <x>592</x>
          <y>2</y>
-         <width>287</width>
-         <height>65</height>
+         <width>290</width>
+         <height>71</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -308,7 +314,7 @@
      <x>0</x>
      <y>0</y>
      <width>1233</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
