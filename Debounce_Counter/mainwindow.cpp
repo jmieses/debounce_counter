@@ -91,7 +91,8 @@ void MainWindow::counterPlot()
     }
 
     if(ui->set_dtc->checkState()){
-        setFailState(fault_detection_counter);
+       // setFailState(fault_detection_counter);
+        setFailPassState(fault_detection_counter);
     }else if(dialog->getFailPassedCheckBox()){
        setFailPassState(fault_detection_counter);
     }else{
@@ -215,19 +216,21 @@ void MainWindow::setFailPassState(QVector<double>& fdc)
     double val = 0;
     double last_val = 0;
     bool toggle = true;
-    for(i=0; i< n;++i){
-        fdc[i] = val;
+      fdc[0] = val;
+    for(i=1; i< n;++i){
         if(ui->jump_up->checkState() && (MAX_FAILED - val) > (MAX_FAILED - ui->jump_up_value->value()) && last_val <= val)
             val = (double)(ui->jump_up_value->value()) - 1.;
         if(ui->jump_down->checkState() && (MAX_FAILED - val) < (MAX_FAILED - ui->jump_up_value->value()) && last_val >= val)
-            val = ((double)(ui->jump_down_value->value()) + 1.);
+            val = (double)(ui->jump_down_value->value()) + 1.;
         last_val = val;
+        fdc[i] = val;
         if(val >= MAX_FAILED ||  val <= MAX_PASSED)
             toggle = !toggle;
         if(toggle)
             val+= (double)(ui->count_up->value());
         else
-            val-= (double)(ui->count_down->value());
+            val+= (double)(ui->count_down->value());
+
     }
 }
 
@@ -245,4 +248,5 @@ void MainWindow::showSecondWindow()
 void MainWindow::on_pushButton_clicked()
 {
     counterPlot();
+    dialog->show();
 }
