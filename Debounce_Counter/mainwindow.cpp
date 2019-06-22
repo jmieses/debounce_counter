@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     dialog = new Dialog(this);
     configurePlot();
+    qDebug() << "This is to test the home branch" << "\n";
 }
 
 MainWindow::~MainWindow()
