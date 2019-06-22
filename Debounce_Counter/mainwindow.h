@@ -34,6 +34,8 @@ public slots:
 private slots:
     void on_pushButton_clicked();
 
+    void on_actionOptions_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer_plot;

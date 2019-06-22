@@ -29,18 +29,40 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QCheckBox" name="fail_pass_checkBox">
+  <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
-     <width>83</width>
-     <height>22</height>
+     <y>20</y>
+     <width>351</width>
+     <height>201</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Fail  Pass</string>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
    </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Operation Cycles</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="Dialog_operation_cycle_spinBox"/>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="fail_pass_checkBox">
+      <property name="text">
+       <string>Fail  Pass</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

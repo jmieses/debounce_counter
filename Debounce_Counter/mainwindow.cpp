@@ -248,5 +248,10 @@ void MainWindow::showSecondWindow()
 void MainWindow::on_pushButton_clicked()
 {
     counterPlot();
+
+}
+
+void MainWindow::on_actionOptions_triggered()
+{
     dialog->show();
 }
