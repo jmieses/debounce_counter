@@ -143,7 +143,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Submit</string>
+        <string>Plot</string>
        </property>
       </widget>
       <widget class="QWidget" name="layoutWidget">
@@ -302,7 +302,7 @@
              <enum>Qt::RightToLeft</enum>
             </property>
             <property name="text">
-             <string>set DTC</string>
+             <string>set Fail</string>
             </property>
            </widget>
           </item>

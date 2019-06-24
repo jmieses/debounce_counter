@@ -10,7 +10,27 @@ Dialog::Dialog(QWidget *parent) :
 
 bool Dialog::getFailPassedCheckBox()
 {
-    return ui->fail_pass_checkBox->checkState();
+    return ui->Dialog_fail_pass_checkBox->checkState();
+}
+
+bool Dialog::getSetFailCheckBox()
+{
+    return ui->Dialog_set_fail_checkBox->checkState();
+}
+
+double Dialog::getExecutionRateSpinBox()
+{
+    return ui->Dialog_executio_rate_spinBox->value();
+}
+
+double Dialog::getOperationCycleSpinBox()
+{
+    return ui->Dialog_operation_cycle_spinBox->value();
+}
+
+double Dialog::getTotalFailTimeSpingBox()
+{
+    return ui->Dialog_total_fail_time_spinBox->value();
 }
 
 Dialog::~Dialog()

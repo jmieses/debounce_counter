@@ -70,11 +70,11 @@ void MainWindow::realtimePlot()
 void MainWindow::counterPlot()
 {
     int i;
-    int n_points = (ui->total_fail_time->value()/ui->execution_rate->value() + 1)* ui->fault_periods->value();
+    int n_points = (dialog->getTotalFailTimeSpingBox()/dialog->getExecutionRateSpinBox() + 1) * dialog->getOperationCycleSpinBox();
     QVector<double> x(2*n_points), fault_detection_counter(n_points), threshold_up(2*n_points), threshold_down(2*n_points);
     QPen pen;
     double x_axis = 0;
-    double step_size = 50;
+    double step_size = dialog->getExecutionRateSpinBox();
     double t_up = ui->threshold_up->value();
     double t_down = ui->threshold_down->value();
 
@@ -91,9 +91,9 @@ void MainWindow::counterPlot()
 
     }
 
-    if(ui->set_dtc->checkState()){
-       // setFailState(fault_detection_counter);
-        setFailPassState(fault_detection_counter);
+    if(dialog->getSetFailCheckBox()){
+        setFailState(fault_detection_counter);
+        //setFailPassState(fault_detection_counter);
     }else if(dialog->getFailPassedCheckBox()){
        setFailPassState(fault_detection_counter);
     }else{
@@ -217,21 +217,31 @@ void MainWindow::setFailPassState(QVector<double>& fdc)
     double val = 0;
     double last_val = 0;
     bool toggle = true;
+    bool bypass_toggle = true;
+    int count = 0;
       fdc[0] = val;
     for(i=1; i< n;++i){
-        if(ui->jump_up->checkState() && (MAX_FAILED - val) > (MAX_FAILED - ui->jump_up_value->value()) && last_val <= val)
+        if(ui->jump_up->checkState() && (MAX_FAILED - val) > (MAX_FAILED - ui->jump_up_value->value()) && last_val <= val){
             val = (double)(ui->jump_up_value->value()) - 1.;
-        if(ui->jump_down->checkState() && (MAX_FAILED - val) < (MAX_FAILED - ui->jump_up_value->value()) && last_val >= val)
+            bypass_toggle = false;
+            qDebug() << "count: " << count++ << endl;
+        }
+        if(ui->jump_down->checkState() && (MAX_FAILED - val) < (MAX_FAILED - ui->jump_up_value->value()) && last_val >= val){
             val = (double)(ui->jump_down_value->value()) + 1.;
+            bypass_toggle = false;
+        }
         last_val = val;
-        fdc[i] = val;
-        if(val >= MAX_FAILED ||  val <= MAX_PASSED)
-            toggle = !toggle;
-        if(toggle)
-            val+= (double)(ui->count_up->value());
-        else
-            val+= (double)(ui->count_down->value());
 
+         if(val >= MAX_FAILED ||  val <= MAX_PASSED)
+            toggle = !toggle;
+         if(bypass_toggle){
+            if(toggle)
+                val+= (double)(ui->count_up->value());
+            else
+                val+= (double)(ui->count_down->value());
+         }
+         bypass_toggle = true;
+         fdc[i] = val;
     }
 }
 

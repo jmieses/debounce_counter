@@ -14,6 +14,10 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     bool getFailPassedCheckBox();
+    bool getSetFailCheckBox();
+    double getExecutionRateSpinBox();
+    double getOperationCycleSpinBox();
+    double getTotalFailTimeSpingBox();
     ~Dialog();
 
 private:
