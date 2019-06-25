@@ -93,6 +93,9 @@
     </item>
     <item>
      <widget class="QSpinBox" name="Dialog_operation_cycle_spinBox">
+      <property name="minimum">
+       <number>1</number>
+      </property>
       <property name="value">
        <number>1</number>
       </property>

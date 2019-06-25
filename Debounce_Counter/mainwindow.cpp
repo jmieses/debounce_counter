@@ -219,30 +219,58 @@ void MainWindow::setFailPassState(QVector<double>& fdc)
     bool toggle = true;
     bool bypass_toggle = true;
     int count = 0;
-      fdc[0] = val;
-    for(i=1; i< n;++i){
-        if(ui->jump_up->checkState() && (MAX_FAILED - val) > (MAX_FAILED - ui->jump_up_value->value()) && last_val <= val){
-            val = (double)(ui->jump_up_value->value()) - 1.;
-            bypass_toggle = false;
-            qDebug() << "count: " << count++ << endl;
-        }
-        if(ui->jump_down->checkState() && (MAX_FAILED - val) < (MAX_FAILED - ui->jump_up_value->value()) && last_val >= val){
-            val = (double)(ui->jump_down_value->value()) + 1.;
-            bypass_toggle = false;
-        }
-        last_val = val;
+    if(ui->jump_up->checkState() && toggle)
+        val = (double)ui->jump_up_value->value();
+    if(ui->jump_down->checkState() && !toggle)
+        val = (double)ui->jump_down_value->value();
+    fdc[0] = 0;
+    fdc[1] = val;
+//    for(i=1; i< n;++i){
+//        if(ui->jump_up->checkState() && (MAX_FAILED - val) > (MAX_FAILED - ui->jump_up_value->value()) && last_val <= val){
+//            val = (double)(ui->jump_up_value->value()) - 1.;
+//            bypass_toggle = false;
+//            qDebug() << "count: " << count++ << endl;
+//        }
+//        if(ui->jump_down->checkState() && (MAX_FAILED - val) < (MAX_FAILED - ui->jump_up_value->value()) && last_val >= val){
+//            val = (double)(ui->jump_down_value->value()) + 1.;
+//            bypass_toggle = false;
+//        }
+//        last_val = val;
 
-         if(val >= MAX_FAILED ||  val <= MAX_PASSED)
-            toggle = !toggle;
-         if(bypass_toggle){
-            if(toggle)
-                val+= (double)(ui->count_up->value());
-            else
-                val+= (double)(ui->count_down->value());
-         }
-         bypass_toggle = true;
-         fdc[i] = val;
-    }
+//         if(val >= MAX_FAILED ||  val <= MAX_PASSED)
+//            toggle = !toggle;
+//         if(bypass_toggle){
+//            if(toggle)
+//                val+= (double)(ui->count_up->value());
+//            else
+//                val+= (double)(ui->count_down->value());
+//         }
+//         bypass_toggle = true;
+//         fdc[i] = val;
+//    }
+      for(i=2; i< n;++i){
+          if(val >= MAX_FAILED ||  val <= MAX_PASSED)
+             toggle = !toggle;
+          if(ui->jump_up->checkState() && val >= MAX_FAILED){
+              val = (double)(ui->jump_down_value->value());
+              bypass_toggle = false;
+          }
+          if(ui->jump_down->checkState() && val <= MAX_PASSED){
+              val = (double)(ui->jump_up_value->value());
+              bypass_toggle = false;
+          }
+          last_val = val;
+
+
+           if(bypass_toggle){
+              if(toggle)
+                  val+= (double)(ui->count_up->value());
+              else
+                  val+= (double)(ui->count_down->value());
+           }
+            bypass_toggle = true;
+           fdc[i] = val;
+      }
 }
 
 void MainWindow::showSecondWindow()
